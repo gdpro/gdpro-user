@@ -1,9 +1,8 @@
 <?php
-namespace GdproUserAccount\Service;
+namespace GdproUserAccount\Process;
 
-class LoginService
+class LoginProcess
 {
-
     protected $authAdapter;
 
     protected $authService;
@@ -21,4 +20,4 @@ class LoginService
 
         $result = $this->authService->authenticate($this->authAdapter);
     }
-} 
+}

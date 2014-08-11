@@ -18,3 +18,7 @@ Module which implement user account features.
 
 
 
+### Installation
+
+Your user entity class have to implement our interface
+GdproUserAccount\Entity\UserAccountInterface.
