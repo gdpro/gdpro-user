@@ -4,11 +4,12 @@ namespace GdproUser\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-class ActivationController extends AbstractActionController
+
+class UserRegistrationController extends AbstractActionController
 {
-    public function activateAction()
+
+    public function confirmRegistrationAction()
     {
-        $this->params()->fromQuery();
 
         return new ViewModel();
     }
