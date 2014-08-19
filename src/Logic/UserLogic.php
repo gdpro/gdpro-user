@@ -3,37 +3,37 @@ namespace GdproUser\Logic;
 
 use GdproTool\Generator\Uuid;
 use GdproTool\Generator\ActivationKey;
-use GdproUser\Entity\UserAccountInterface;
+use GdproUser\Entity\UserInterface;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 
-class UserAccountLogic
+class UserLogic
 {
     protected $entityManager;
     protected $repository;
-    protected $entityClass;
+    protected $user;
 
     public function __construct(
         EntityManager $entityManager,
         EntityRepository $repository,
-        $entityClass
+        UserInterface $user
     ) {
         $this->entityManager = $entityManager;
         $this->repository = $repository;
-        $this->entityClass = $entityClass;
+        $this->user = $user;
     }
 
-    public function createUserAccount()
+    public function createUser()
     {
-        $userAccount = new $this->entityClass();
-        $userAccount->setUuid(Uuid::v5());
-        $userAccount->setActivated(0);
-        $userAccount->setActivationKey(ActivationKey::generate());
-        $userAccount->setCreationDate(new \Datetime());
-        $userAccount->setDeleted(0);
-        $userAccount->setIsAdmin(0);
+        $user = clone $this->user;
 
-        return $userAccount;
+        $user->setUuid(Uuid::v5());
+        $user->setActivated(0);
+        $user->setActivationKey(ActivationKey::generate());
+        $user->setCreationDate(new \Datetime());
+        $user->setDeleted(0);
+
+        return $user;
     }
 
     public function existEmail($email)
@@ -47,20 +47,20 @@ class UserAccountLogic
         return false;
     }
 
-    public function saveUserAccount(UserAccountInterface $userAccount)
+    public function saveUser(UserInterface $user)
     {
-        $userAccount->setModificationDate(new \Datetime());
+        $user->setModificationDate(new \Datetime());
 
-        $this->entityManager->persist($userAccount);
+        $this->entityManager->persist($user);
         $this->entityManager->flush();
     }
 
-    public function deleteUserAccount(UserAccountInterface $userAccount)
+    public function deleteUser(UserInterface $user)
     {
-        $userAccount->setDeletionDate(new \Datetime());
-        $userAccount->setDeleted(1);
+        $user->setDeletionDate(new \Datetime());
+        $user->setDeleted(1);
 
-        $this->saveUserAccount($userAccount);
+        $this->saveUser($user);
     }
 
 
