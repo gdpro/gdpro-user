@@ -4,19 +4,19 @@ namespace GdproUser\Factory\Logic;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class UserAccountLogicFactory implements FactoryInterface
+class UserLogicFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $services)
     {
         $entityManager = $services->get('Doctrine\ORM\EntityManager');
 
         $config = $services->get('config');
-        $entityClass = $config['gdpro_user']['entity_class'];
+        $userEntityName = $config['gdpro_user']['entity_name'];
 
-        return new \GdproUser\Logic\UserAccountLogic(
+        return new \GdproUser\Logic\UserLogic(
             $entityManager,
-            $entityManager->getRepository($entityClass),
-            $entityClass
+            $entityManager->getRepository($userEntityName),
+            new $userEntityName()
         );
     }
 }

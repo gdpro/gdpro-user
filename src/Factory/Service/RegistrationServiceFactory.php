@@ -10,10 +10,12 @@ class RegistrationServiceFactory implements FactoryInterface
     {
         $config = $services->get('config');
 
-        return new \GdproUser\Process\RegistrationProcess(
-            $config['gdpro_user']['service']['registration'],
+        return new \GdproUser\Service\RegistrationService(
+            $config['gdpro_user']['registration'],
             $services->get('gdpro_user.logic.user'),
-            $services->get('gdpro_mailer.message.registration')
+            $services->get('gdpro_mailer.mailer_service'),
+            $services->get('gdpro_mailer.message_renderer'),
+            $services->get('gdpro_mailer.smtp_manager')
         );
     }
 }
