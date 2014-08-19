@@ -1,5 +1,5 @@
 <?php
-namespace GdproUserAccount\Repository;
+namespace GdproUser\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
