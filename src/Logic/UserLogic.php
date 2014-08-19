@@ -1,9 +1,9 @@
 <?php
-namespace GdproUserAccount\Logic;
+namespace GdproUser\Logic;
 
 use GdproTool\Generator\Uuid;
 use GdproTool\Generator\ActivationKey;
-use GdproUserAccount\Entity\UserAccountInterface;
+use GdproUser\Entity\UserAccountInterface;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 

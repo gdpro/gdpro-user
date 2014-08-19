@@ -1,8 +1,8 @@
 <?php
-namespace GdproUserAccount\Repository;
+namespace GdproUser\Repository;
 
 use Doctrine\ORM\Query\Expr;
-use GdproUserAccount\Entity\UserAccount;
+use GdproUser\Entity\UserAccount;
 
 class UserAccountRepository extends AbstractRepository
 {

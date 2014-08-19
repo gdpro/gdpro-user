@@ -1,9 +1,9 @@
 <?php
-namespace GdproUserAccount\Process;
+namespace GdproUser\Process;
 
-use GdproUserAccount\Logic\UserAccountLogic;
-use GdproMail\Message;
-use GdproUserAccount\Entity\UserAccountInterface;
+use GdproUser\Logic\UserAccountLogic;
+use GdproMailer\Message;
+use GdproUser\Entity\UserInterface;
 
 class RegistrationProcess
 {
@@ -24,10 +24,10 @@ class RegistrationProcess
         $this->smpt = $smtp;
     }
 
-    public function register(UserAccountInterface $userAccount)
+    public function register(UserInterface $user)
     {
         // Check email not already use
-        $emailExist = $this->userAccountLogic->existEmail($userAccount->getEmail());
+        $emailExist = $this->userAccountLogic->existEmail($user->getEmail());
 
         if($emailExist) {
             throw new \Exception('Email already in use');
@@ -39,17 +39,11 @@ class RegistrationProcess
         // If send activation email options is enabled
         if($this->config['send_email_activation']['enabled'] == true) {
             $this->message->setVars([
-                'activationKey' => $userAccount->getActivationKey()
+                'activationKey' => $user->getActivationKey()
             ]);
             $this->smtp->send(
-                $this->message, $smtp, $userAccount->getEmail()
+                $this->message, $this->smtp, $user->getEmail()
             );
-
-
         }
-
-        return $userAccount;
-
-
     }
 }

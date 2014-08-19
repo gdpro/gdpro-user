@@ -1,35 +1,36 @@
 <?php
 return [
-    // Process
-    'gdpro_user_account.process.registration' => 'GdproUserAccount\Factory\Process\RegistrationProcessFactory',
+    // Service
+    'gdpro_user.service.registration' => 'GdproUser\Factory\Service\RegistrationServiceFactory',
+
 
     // Logic
-    'gdpro_user_account.logic.user_account' => 'GdproUserAccount\Factory\Logic\UserAccountLogicFactory',
+    'gdpro_user.logic.user' => 'GdproUser\Factory\Logic\UserLogicFactory',
 
 
 //
 //    // Service
-//    'gdpro_user_account.service.signup' => function ($services) {
-//            return new \GdproUserAccount\Service\SignupService(
-//                $services->get('gdpro_user_account.service.signup_mail'),
-//                $services->get('gdpro_user_account.model.user_account')
+//    'gdpro_user.service.signup' => function ($services) {
+//            return new \GdproUser\Service\SignupService(
+//                $services->get('gdpro_user.service.signup_mail'),
+//                $services->get('gdpro_user.model.user_account')
 //            );
 //        },
-//    'gdpro_user_account.service.signup_mail' => function ($services) {
+//    'gdpro_user.service.signup_mail' => function ($services) {
 //            return new \GdproMail\Service\MailService(
-//                $services->get('gdpro_user_account.mail.transport.smtp.signup'),
-//                $services->get('gdpro_user_account.mail.message.signup')
+//                $services->get('gdpro_user.mail.transport.smtp.signup'),
+//                $services->get('gdpro_user.mail.message.signup')
 //            );
 //        },
-//    'gdpro_user_account.service.login' => function ($services) {
-//            return new \GdproUserAccount\Service\LoginService(
+//    'gdpro_user.service.login' => function ($services) {
+//            return new \GdproUser\Service\LoginService(
 //                $services->get('doctrine.authenticationadapter.odm_default'),
 //                $services->get('zend.authentication.authentication_service')
 //            );
 //        },
 //
 //    // Mail - Message
-//    'gdpro_user_account.mail.message.signup' => function ($services) {
+//    'gdpro_user.mail.message.signup' => function ($services) {
 //            $config = $services->get('config');
 //
 //            return new \GdproMail\Mail\Message(
@@ -39,7 +40,7 @@ return [
 //            );
 //        },
 //    // Mail - Transport - Smtp
-//    'gdpro_user_account.mail.transport.smtp.signup' => function ($services) {
+//    'gdpro_user.mail.transport.smtp.signup' => function ($services) {
 //            $config = $services->get('config');
 //
 //            return new \GdproMail\Mail\Transport\Smtp(

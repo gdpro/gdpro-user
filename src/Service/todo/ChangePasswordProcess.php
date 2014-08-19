@@ -1,5 +1,5 @@
 <?php
-namespace GdproUserAccount\Process;
+namespace GdproUser\Process;
 
 class ResetPasswordProcess
 {
