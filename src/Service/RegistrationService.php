@@ -1,48 +1,63 @@
 <?php
-namespace GdproUser\Process;
+namespace GdproUser\Service;
 
-use GdproUser\Logic\UserAccountLogic;
-use GdproMailer\Message;
+use GdproUser\Logic\UserLogic;
 use GdproUser\Entity\UserInterface;
+use GdproMailer\MailerService;
+use GdproMailer\MessageRenderer;
+use GdproMailer\SmtpManager;
 
-class RegistrationProcess
+class RegistrationService
 {
     protected $config;
-    protected $userAccountLogic;
-    protected $message;
-    protected $smtp;
+    protected $userLogic;
+    protected $mailerService;
+    protected $messageRenderer;
+    protected $smtpManager;
 
     public function __construct(
         array $config,
-        UserAccountLogic $userAccountLogic,
-        Message $message,
-        Smtp $smtp
+        UserLogic $userLogic,
+        MailerService $mailerService,
+        MessageRenderer $messageRenderer,
+        SmtpManager $smtpManager
     ) {
         $this->config = $config;
-        $this->userAccountLogic = $userAccountLogic;
-        $this->message = $message;
-        $this->smpt = $smtp;
+        $this->userLogic = $userLogic;
+        $this->mailerService = $mailerService;
+        $this->messageRenderer = $messageRenderer;
+        $this->smtpManager = $smtpManager;
     }
 
     public function register(UserInterface $user)
     {
         // Check email not already use
-        $emailExist = $this->userAccountLogic->existEmail($user->getEmail());
+        $emailExist = $this->userLogic->existEmail(
+            $user->getEmail()
+        );
 
         if($emailExist) {
-            throw new \Exception('Email already in use');
+            throw new \Exception(
+                'L\'adresse email "'.$user->getEmail().'" n\'est pas disponible.'
+            );
         }
 
         // Save user account in DB
-//        $this->userAccountLogic->saveUserAccount($userAccount);
+        $this->userLogic->saveUser($user);
 
         // If send activation email options is enabled
         if($this->config['send_email_activation']['enabled'] == true) {
-            $this->message->setVars([
-                'activationKey' => $user->getActivationKey()
-            ]);
-            $this->smtp->send(
-                $this->message, $this->smtp, $user->getEmail()
+            $message = $this->messageRenderer->render(
+
+                $this->config['template_email'],
+                [
+                    'activationKey' => $user->getActivationKey()
+                ]);
+
+            $this->mailerService->sendMessage(
+                $message,
+                $this->smtpManager->get('socialcar'),
+                $user->getEmail()
             );
         }
     }
