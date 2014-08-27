@@ -54,9 +54,11 @@ class RegistrationService
                     'activationKey' => $user->getActivationKey()
                 ]);
 
+            $smtpName = $this->config['smtp_name'];
+
             $this->mailerService->sendMessage(
                 $message,
-                $this->smtpManager->get('socialcar'),
+                $this->smtpManager->get($smtpName),
                 $user->getEmail()
             );
         }
