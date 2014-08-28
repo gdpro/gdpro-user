@@ -42,9 +42,6 @@ class RegistrationService
             );
         }
 
-        // Save user account in DB
-        $this->userLogic->saveUser($user);
-
         // If send activation email options is enabled
         if($this->config['send_email_activation']['enabled'] == true) {
             $message = $this->messageRenderer->render(
@@ -62,5 +59,8 @@ class RegistrationService
                 $user->getEmail()
             );
         }
+
+        // Save user account in DB (at the end if all is ok)
+        $this->userLogic->saveUser($user);
     }
 }

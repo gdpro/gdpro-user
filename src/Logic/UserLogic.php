@@ -63,6 +63,33 @@ class UserLogic
         $this->saveUser($user);
     }
 
+    /**
+     * Find One user by activationKey
+     *
+     * @param string $activationKey
+     * @return UserInterface
+     */
+    public function findOneUserByActivationKey($activationKey)
+    {
+        $user = $this->repository->findOneBy([
+            'activationKey' =>$activationKey
+        ]);
+
+        return $user;
+    }
+
+    public function activateUser(UserInterface $user)
+    {
+        $user->setActivated(true);
+        $user->setActivationDate(new \DateTime());
+        $user->setActivationKey(null);
+    }
+
+
+
+
+
+
 
     public function findUserByUsername($username)
     {

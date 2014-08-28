@@ -2,6 +2,8 @@
 return [
     // Service
     'gdpro_user.service.registration' => 'GdproUser\Factory\Service\RegistrationServiceFactory',
+    'gdpro_user.service.activation' => 'GdproUser\Factory\Service\ActivationServiceFactory',
+
 
 
     // Logic
