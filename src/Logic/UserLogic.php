@@ -27,7 +27,7 @@ class UserLogic
     {
         $user = clone $this->user;
 
-        $user->setUuid(Uuid::v5());
+        $user->setUuid(Uuid::v1());
         $user->setActivated(0);
         $user->setActivationKey(ActivationKey::generate());
         $user->setCreationDate(new \Datetime());
