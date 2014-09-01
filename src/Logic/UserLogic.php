@@ -38,7 +38,10 @@ class UserLogic
 
     public function existEmail($email)
     {
-        $result = $this->repository->findOneBy(['email' => $email]);
+        $result = $this->repository->findOneBy([
+            'email' => $email,
+            'deleted' => 0
+        ]);
 
         if($result) {
             return true;
@@ -72,7 +75,8 @@ class UserLogic
     public function findOneUserByActivationKey($activationKey)
     {
         $user = $this->repository->findOneBy([
-            'activationKey' =>$activationKey
+            'activationKey' => $activationKey,
+            'deleted' => 0
         ]);
 
         return $user;
