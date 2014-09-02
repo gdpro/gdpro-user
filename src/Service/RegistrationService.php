@@ -29,7 +29,7 @@ class RegistrationService
         $this->smtpManager = $smtpManager;
     }
 
-    public function register(UserInterface $user)
+    public function register($user)
     {
         // Check email not already use
         $emailExist = $this->userLogic->existEmail(

@@ -1,5 +1,5 @@
 <?php
-namespace GdproUserAccount\Command;
+namespace GdproUser\Command;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;

@@ -16,7 +16,7 @@ class UserLogic
     public function __construct(
         EntityManager $entityManager,
         EntityRepository $repository,
-        UserInterface $user
+        $user
     ) {
         $this->entityManager = $entityManager;
         $this->repository = $repository;
@@ -50,7 +50,7 @@ class UserLogic
         return false;
     }
 
-    public function saveUser(UserInterface $user)
+    public function saveUser($user)
     {
         $user->setModificationDate(new \Datetime());
 
@@ -58,7 +58,7 @@ class UserLogic
         $this->entityManager->flush();
     }
 
-    public function deleteUser(UserInterface $user)
+    public function deleteUser($user)
     {
         $user->setDeletionDate(new \Datetime());
         $user->setDeleted(1);
@@ -82,16 +82,12 @@ class UserLogic
         return $user;
     }
 
-    public function activateUser(UserInterface $user)
+    public function activateUser($user)
     {
         $user->setActivated(true);
         $user->setActivationDate(new \DateTime());
         $user->setActivationKey(null);
     }
-
-
-
-
 
 
 
