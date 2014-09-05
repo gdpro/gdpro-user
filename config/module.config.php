@@ -20,6 +20,9 @@ return [
     'controllers' => [
         'invokables' => [
             'GdproUser\Controller\UserRegistration' => 'GdproUser\Controller\UserRegistrationController',
+        ],
+        'factories' => [
+            'GdproUser\Controller\UserActivation' => 'GdproUser\Factory\Controller\UserActivationControllerFactory',
         ]
     ],
 
@@ -66,7 +69,23 @@ return [
                                 'action' => 'confirm-registration',
                             ],
                         ]
+                    ],
+                    'activation' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/activation[/:activation_key]',
+//                            'constraints' => [
+//                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+//                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+//                            ],
+                            'defaults' => [
+                                '__NAMESPACE__' => 'GdproUser\Controller',
+                                'controller' => 'UserActivation',
+                                'action' => 'activate',
+                            ],
+                        ]
                     ]
+
                 ]
             ]
         ]

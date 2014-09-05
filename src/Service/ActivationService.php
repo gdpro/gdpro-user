@@ -21,7 +21,7 @@ class ActivationService
         $user = $this->userLogic->findOneUserByActivationKey($activationKey);
 
         // If user don't exist return error
-        if(!$user instanceof UserInterface) {
+        if(!$user) {
             throw new \Exception(
                 'La clee d\'activation fourni n\'est pas valide ', 400
             );

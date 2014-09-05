@@ -1,7 +1,7 @@
 <?php
-namespace GdproUser\Process;
+namespace GdproUser\Service;
 
-class LoginProcess
+class LoginService
 {
     protected $authAdapter;
 

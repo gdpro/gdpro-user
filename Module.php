@@ -28,4 +28,9 @@ class Module
             ),
         );
     }
+
+    public function getModuleDependencies()
+    {
+        return array('GdproMailer');
+    }
 }
