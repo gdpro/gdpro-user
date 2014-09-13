@@ -88,32 +88,4 @@ class UserLogic
         $user->setActivationDate(new \DateTime());
         $user->setActivationKey(null);
     }
-
-
-
-    public function findUserByUsername($username)
-    {
-    }
-
-    public function findUserByEmail($email)
-    {
-
-    }
-
-    //  check if the value looks like an email to choose
-    public function findUserByUsernameOrEmail($value)
-    {
-    }
-
-    public function findUserByConfirmationToken($token)
-    {
-    }
-
-    public function findUsers()
-    {
-    }
-
-    public function updateUser($user)
-    {
-    }
 }

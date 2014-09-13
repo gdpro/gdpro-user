@@ -11,7 +11,7 @@ class UserLogicFactory implements FactoryInterface
         $entityManager = $services->get('Doctrine\ORM\EntityManager');
 
         $config = $services->get('config');
-        $userEntityName = $config['gdpro_user']['entity_name'];
+        $userEntityName = $config['gdpro_user']['entity_class'];
 
         return new \GdproUser\Logic\UserLogic(
             $entityManager,

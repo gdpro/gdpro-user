@@ -1,7 +1,7 @@
 <?php
 return [
     'gdpro_user' => [
-        'entity_name' => 'GdproUser\Entity\User',
+        'entity_class' => 'GdproUser\Entity\User',
         'registration' => [
             'send_email_activation' => [
                 'enabled' => true,
@@ -10,19 +10,47 @@ return [
         'reset-email' => [
         ],
         'reset-password' => [
-        ]
-    ],
-
-    'service_manager' => [
-        'factories' => include 'service_manager.factories.config.php',
+        ],
+        'password_hashing' => [
+            'cost' => '10',
+            'salt' => 'This is my very long salt key. Secret of course!'
+        ],
+//
+//        'session' => [
+//            'config' => [
+//                'class' => 'Zend\Session\Config\SessionConfig',
+//                'options' => [
+//                    'name' => 'gdpro_user'
+//                ]
+//            ],
+//            'storage' => 'Zend\Session\Storage\SessionArrayStorage',
+//            'validators' => [
+//                [
+//                    'Zend\Session\Validator\RemoteAddr',
+//                    'Zend\Session\Validator\HttpUserAgent'
+//                ]
+//            ]
+//        ]
     ],
 
     'controllers' => [
         'invokables' => [
-            'GdproUser\Controller\UserRegistration' => 'GdproUser\Controller\UserRegistrationController',
+            'GdproUser\Controller\Registration'
+            => 'GdproUser\Controller\RegistrationController',
         ],
         'factories' => [
-            'GdproUser\Controller\UserActivation' => 'GdproUser\Factory\Controller\UserActivationControllerFactory',
+            'GdproUser\Controller\Activation' =>
+                'GdproUser\Factory\Controller\ActivationControllerFactory',
+            'GdproUser\Controller\Login' =>
+                'GdproUser\Factory\Controller\LoginControllerFactory',
+            'GdproUser\Controller\Logout' =>
+                'GdproUser\Factory\Controller\LogoutControllerFactory',
+        ]
+    ],
+
+    'hydrators' => [
+        'factories' => [
+            'gdpro_user.hydrator.user' => 'GdproUser\Factory\Hydrator\UserHydratorFactory'
         ]
     ],
 
@@ -34,61 +62,6 @@ return [
         'template_path_stack' => [
             __DIR__ . '/../view',
         ],
-    ],
-
-    'router' => [
-        'routes' => [
-            'user' => [
-                'type' => 'Segment',
-                'options' => [
-                    'route' => '/user',
-                ],
-                'may_terminate' => false,
-                'child_routes' => [
-//                    'registration' => [
-//                        'type' => 'Literal',
-//                        'options' => [
-//                            'route' => '/registration',
-//                            'defaults' => [
-//                                'controller' => 'IndividualRegistration',
-//                                'action' => 'register',
-//                            ]
-//                        ]
-//                    ],
-                    'registration_confirmation' => [
-                        'type' => 'Literal',
-                        'options' => [
-                            'route' => '/confirmation-registration',
-                            'constraints' => [
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ],
-                            'defaults' => [
-                                '__NAMESPACE__' => 'GdproUser\Controller',
-                                'controller' => 'UserRegistration',
-                                'action' => 'confirm-registration',
-                            ],
-                        ]
-                    ],
-                    'activation' => [
-                        'type' => 'Segment',
-                        'options' => [
-                            'route' => '/activation[/:activation_key]',
-//                            'constraints' => [
-//                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-//                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-//                            ],
-                            'defaults' => [
-                                '__NAMESPACE__' => 'GdproUser\Controller',
-                                'controller' => 'UserActivation',
-                                'action' => 'activate',
-                            ],
-                        ]
-                    ]
-
-                ]
-            ]
-        ]
     ],
 
     'console' => [
@@ -105,6 +78,10 @@ return [
                 ]
             ]
         ]
-    ]
+    ],
+
+    'service_manager' => include 'service_manager.config.php',
+    'router' => include 'router.config.php',
+    'doctrine' => include 'doctrine.config.php',
 ];
 

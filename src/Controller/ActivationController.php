@@ -5,7 +5,7 @@ use GdproUser\Service\ActivationService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-class UserActivationController extends AbstractActionController
+class ActivationController extends AbstractActionController
 {
     protected $activationService;
 
