@@ -5,32 +5,34 @@ return [
             'type' => 'Segment',
             'options' => [
                 'route' => '/user',
+                'defaults' => [
+                    '__NAMESPACE__' => 'GdproUser\Controller',
+                ]
             ],
             'may_terminate' => false,
             'child_routes' => [
-//                    'registration' => [
-//                        'type' => 'Literal',
-//                        'options' => [
-//                            'route' => '/registration',
-//                            'defaults' => [
-//                                'controller' => 'IndividualRegistration',
-//                                'action' => 'register',
-//                            ]
-//                        ]
-//                    ],
-                'registration_confirmation' => [
+                'registration' => [
                     'type' => 'Literal',
                     'options' => [
-                        'route' => '/confirmation-registration',
-                        'constraints' => [
-                            'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        ],
+                        'route' => '/registration',
                         'defaults' => [
                             '__NAMESPACE__' => 'GdproUser\Controller',
                             'controller' => 'Registration',
-                            'action' => 'confirm-registration',
-                        ],
+                            'action' => 'register',
+                        ]
+                    ],
+                    'may_terminate' => true,
+                    'child_routes' => [
+                        'registration' => [
+                            'type' => 'Literal',
+                            'options' => [
+                                'route' => '/confirmation',
+                                'defaults' => [
+                                    'controller' => 'Registration',
+                                    'action' => 'confirmation'
+                                ]
+                            ]
+                        ]
                     ]
                 ],
                 'activation' => [

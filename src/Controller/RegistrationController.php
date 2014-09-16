@@ -5,10 +5,15 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
 
-class UserRegistrationController extends AbstractActionController
+class RegistrationController extends AbstractActionController
 {
 
-    public function confirmRegistrationAction()
+    public function registerAction()
+    {
+
+    }
+
+    public function confirmAction()
     {
 
         return new ViewModel();

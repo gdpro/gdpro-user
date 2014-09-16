@@ -1,5 +1,8 @@
 <?php
 return [
+    'aliases' => [
+        'Zend\Authentication\AuthenticationService' => 'gdpro_user.service.authentication'
+    ],
     'invokables' => [
         'gdpro_user.form.login' => 'GdproUser\Form\LoginForm',
     ],
