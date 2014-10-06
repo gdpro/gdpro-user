@@ -1,32 +1,27 @@
 <?php
 namespace GdproUser\Service;
 
+use GdproMailer\Job\SendMailJob;
 use GdproUser\Logic\UserLogic;
-use GdproUser\Entity\UserInterface;
-use GdproMailer\MailerService;
-use GdproMailer\MessageRenderer;
-use GdproMailer\SmtpManager;
+use SlmQueue\Queue\QueueInterface;
 
 class RegistrationService
 {
     protected $config;
     protected $userLogic;
-    protected $mailerService;
-    protected $messageRenderer;
-    protected $smtpManager;
+    protected $sendMailJob;
+    protected $queue;
 
     public function __construct(
         array $config,
         UserLogic $userLogic,
-        MailerService $mailerService,
-        MessageRenderer $messageRenderer,
-        SmtpManager $smtpManager
+        SendMailJob $sendMailJob,
+        QueueInterface $queue
     ) {
         $this->config = $config;
         $this->userLogic = $userLogic;
-        $this->mailerService = $mailerService;
-        $this->messageRenderer = $messageRenderer;
-        $this->smtpManager = $smtpManager;
+        $this->sendMailJob = $sendMailJob;
+        $this->queue = $queue;
     }
 
     public function register($user)
@@ -47,20 +42,19 @@ class RegistrationService
 
         // If send activation email options is enabled
         if($this->config['send_email_activation']['enabled'] == true) {
-            $message = $this->messageRenderer->render(
 
-                $this->config['template_email'],
-                [
+            $content = [
+                'templateEmail' => $this->config['template_email'],
+                'vars' => [
                     'activationKey' => $user->getActivationKey()
-                ]);
+                ],
+                'smtpName' => $this->config['smtp_name'],
+                'recipient' => $user->getEmail()
+            ];
 
-            $smtpName = $this->config['smtp_name'];
+            $this->sendMailJob->setContent($content);
 
-            $this->mailerService->sendMessage(
-                $message,
-                $this->smtpManager->get($smtpName),
-                $user->getEmail()
-            );
+            $this->queue->push($this->sendMailJob);
         }
     }
 }

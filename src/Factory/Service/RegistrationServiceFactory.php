@@ -9,13 +9,15 @@ class RegistrationServiceFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $services)
     {
         $config = $services->get('config');
+        $jobPluginManager = $services->get('SlmQueue\Job\JobPluginManager');
+        $queuePluginManager = $services->get('SlmQueue\Queue\QueuePluginManager');
+
 
         return new \GdproUser\Service\RegistrationService(
             $config['gdpro_user']['registration'],
             $services->get('gdpro_user.logic.user'),
-            $services->get('gdpro_mailer.mailer_service'),
-            $services->get('gdpro_mailer.message_renderer'),
-            $services->get('gdpro_mailer.smtp_manager')
+            $jobPluginManager->get('gdpro_mailer.job.send_mail'),
+            $queuePluginManager->get('default')
         );
     }
 }
