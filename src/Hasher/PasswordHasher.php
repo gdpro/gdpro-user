@@ -7,6 +7,9 @@ class PasswordHasher
 
     protected $salt = 'This is my default salt key';
 
+    /**
+     * @deprecated
+     */
     public function __construct(array $options)
     {
         if(array_key_exists('salt', $options)) {
@@ -18,6 +21,9 @@ class PasswordHasher
         }
     }
 
+    /**
+     * @deprecated
+     */
     public function hash($password)
     {
         $passwordOptions = [

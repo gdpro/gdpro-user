@@ -24,6 +24,11 @@ class RegistrationService
         $this->queue = $queue;
     }
 
+    /**
+     * @param $user
+     * @throws \Exception
+     * @deprecated
+     */
     public function register($user)
     {
         // Check email not already use
@@ -56,5 +61,10 @@ class RegistrationService
 
             $this->queue->push($this->sendMailJob);
         }
+    }
+
+    public function registerUser($user)
+    {
+        return $this->register($user);
     }
 }
