@@ -8,6 +8,7 @@ use Zend\View\Model\ViewModel;
 
 class LoginController extends AbstractActionController
 {
+    protected $viewModel;
     protected $loginService;
     protected $loginForm;
 
@@ -15,22 +16,29 @@ class LoginController extends AbstractActionController
         LoginService $loginService,
         LoginForm $loginForm
     ) {
+        $this->viewModel = new ViewModel();
         $this->loginService = $loginService;
         $this->loginForm = $loginForm;
     }
 
     public function loginAction()
     {
+        $role = $this->params()->fromRoute('role');
+
+        $errors = [];
+        if(isset($role)) {
+            $errors [] = 'Vous devez &ecirc;tre connect&eacute; avec un compte '.$role;
+        }
+
         /** @var \Zend\Http\Request $request */
         $request = $this->getRequest();
 
-        $variables = [
-            'loginForm' => $this->loginForm
-        ];
+        $this->viewModel->setVariable('loginForm', $this->loginForm);
 
         // If request is not a post, return view
         if(!$request->isPost()) {
-            return new ViewModel($variables);
+            $this->viewModel->setVariable('errors', $errors);
+            return $this->viewModel;
         }
 
         // Get Post data and set into form
@@ -39,7 +47,8 @@ class LoginController extends AbstractActionController
 
         // If login form is not valid, return view
         if(!$this->loginForm->isValid()) {
-            return new ViewModel($variables);
+            $this->viewModel->setVariable('errors', $errors);
+            return $this->viewModel;
         }
 
         // Hydrate User with data
@@ -48,8 +57,10 @@ class LoginController extends AbstractActionController
         $authResult = $this->loginService->login($email, $password);
 
         if(!$authResult->isValid()) {
-            $variables['errors'] = $authResult->getMessages();
-            return new ViewModel($variables);
+            $errors[] = $authResult->getMessages();
+
+            $this->viewModel->setVariable('errors', $errors);
+            return $this->viewModel;
         }
 
         return $this->redirect()->toRoute('auth/redirection');

@@ -4,8 +4,19 @@ $form = $this->loginForm;
 
 <div class="row">
     <div class="col-md-offset-4 col-md-4">
-        <?php
-        echo $this->form($form);
-        ?>
+
+        <div class="row">
+            <?php
+                if(isset($this->errors)) {
+                    echo $this->partial('layout/partial/errors');
+                }
+            ?>
+
+            <div class="col-md-12">
+            <?php
+                echo $this->form($form);
+                ?>
+            </div>
+        </div>
     </div>
 </div>

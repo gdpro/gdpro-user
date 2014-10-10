@@ -51,9 +51,9 @@ return [
                     ]
                 ],
                 'login' => [
-                    'type' => 'Literal',
+                    'type' => 'Segment',
                     'options' => [
-                        'route' => '/login',
+                        'route' => '/login[/:role]',
 //                            'constraints' => [
 //                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
 //                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
@@ -62,6 +62,7 @@ return [
                             '__NAMESPACE__' => 'GdproUser\Controller',
                             'controller' => 'Login',
                             'action' => 'login',
+                            'role' => null
                         ],
                     ]
                 ],

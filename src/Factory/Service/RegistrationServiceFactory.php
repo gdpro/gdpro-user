@@ -17,7 +17,7 @@ class RegistrationServiceFactory implements FactoryInterface
             $config['gdpro_user']['registration'],
             $services->get('gdpro_user.logic.user'),
             $jobPluginManager->get('gdpro_mailer.job.send_mail'),
-            $queuePluginManager->get('default')
+            $queuePluginManager->get('socialcar')
         );
     }
 }
