@@ -8,7 +8,7 @@ return [
     ],
     'factories' =>  [
         // Service
-        'gdpro_ugit statser.service.registration' => 'GdproUser\Factory\Service\RegistrationServiceFactory',
+        'gdpro_user.service.registration' => 'GdproUser\Factory\Service\RegistrationServiceFactory',
         'gdpro_user.service.activation' => 'GdproUser\Factory\Service\ActivationServiceFactory',
         'gdpro_user.service.login' => 'GdproUser\Factory\Service\LoginServiceFactory',
 

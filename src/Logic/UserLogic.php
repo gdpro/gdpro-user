@@ -88,4 +88,13 @@ class UserLogic
         $user->setActivationDate(new \DateTime());
         $user->setActivationKey(null);
     }
+
+    public function findAllUsers($joinPersonalDetails = false)
+    {
+        if($joinPersonalDetails) {
+            $users = $this->repository->findAllUsersAndJoinPersonalDetails();
+
+            return $users;
+        }
+    }
 }

@@ -31,6 +31,15 @@ class RegistrationService
      */
     public function register($user)
     {
+        return $this->registerUser($user);
+    }
+
+    /**
+     * @param $user
+     * @throws \Exception
+     */
+    public function registerUser($user)
+    {
         // Check email not already use
         $emailExist = $this->userLogic->existEmail(
             $user->getEmail()
@@ -61,10 +70,5 @@ class RegistrationService
 
             $this->queue->push($this->sendMailJob);
         }
-    }
-
-    public function registerUser($user)
-    {
-        return $this->register($user);
     }
 }
