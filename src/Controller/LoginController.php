@@ -27,7 +27,7 @@ class LoginController extends AbstractActionController
 
         $errors = [];
         if(isset($role)) {
-            $errors [] = 'Vous devez &ecirc;tre connect&eacute; avec un compte '.$role;
+            $errors[] = 'Vous devez &ecirc;tre connect&eacute; avec un compte '.$role;
         }
 
         /** @var \Zend\Http\Request $request */
@@ -57,7 +57,7 @@ class LoginController extends AbstractActionController
         $authResult = $this->loginService->login($email, $password);
 
         if(!$authResult->isValid()) {
-            $errors[] = $authResult->getMessages();
+            $errors = $authResult->getMessages();
 
             $this->viewModel->setVariable('errors', $errors);
             return $this->viewModel;
