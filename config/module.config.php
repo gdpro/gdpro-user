@@ -76,6 +76,10 @@ return [
         ]
     ],
 
+    'session_containers' => [
+        'gdpro_user.login_redirection',
+    ],
+
     'service_manager' => include 'service_manager.config.php',
     'router' => include 'router.config.php',
     'doctrine' => include 'doctrine.config.php',
