@@ -1,7 +1,10 @@
 <?php
 namespace GdproUser\Controller;
 
+use Core\Extractor\UserExtractor;
+use GdproUser\Hydrator\UserHydrator;
 use GdproUser\Logic\UserLogic;
+use Zend\Authentication\AuthenticationService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -19,7 +22,7 @@ class UserController extends AbstractActionController
 
     public function __construct(
         ViewModel $viewModel,
-        AuthenticationService $authenticationService;
+        AuthenticationService $authenticationService,
         UserLogic $userLogic,
         UserHydrator $userHydrator,
         UserExtractor $userExtractor
@@ -49,11 +52,11 @@ class UserController extends AbstractActionController
 
         $userData = $this->params()->fromPost();
         $id = $this->params()->fromGet('id');
-        if(!isset($id)) {
-            $id =
-        }
-
-        $routeParams['id'] = $user->getId();
+//        if(!isset($id)) {
+//            $id =
+//        }
+//
+//        $routeParams['id'] = $user->getId();
         return $this->redirect()->toRoute('user', ['action' => 'list']);
     }
 }
