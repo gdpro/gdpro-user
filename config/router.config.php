@@ -16,8 +16,7 @@ return [
                     'options' => [
                         'route' => '/registration',
                         'defaults' => [
-                            '__NAMESPACE__' => 'GdproUser\Controller',
-                            'controller' => 'Registration',
+                            'controller' => 'GdproUser\Controller\Registration',
                             'action' => 'register',
                         ]
                     ],

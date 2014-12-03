@@ -1,18 +1,30 @@
 {
-    "name": "gdpro/gdpro-tool",
-    "description": "A set of tool used to develop.",
-    "type": "library",
-    "license": "MIT",
-    "authors" : [
+    "name": "gdpro/gdpro-user",
+    "description": "User Module",
+    "homepage": "https://github.com/gdpro/gdpro-skeleton-module/",
+    "authors":[
         {
-            "name": "Gary Gitton",
+            "name":"Gary Gitton",
             "email": "info@gary.pro",
-            "homepage": "www.gary.pro",
-            "role": "Engineer"
+            "homepage":"http://www.gary.pro/"
         }
     ],
     "require": {
-        "gdpro/gdpro-tool": "*"
+        "php": ">=5.5.8",
+        "zendframework/zendframework": "dev-master",
+        "gdpro/gdpro-tool": "~1.0"
     },
-    "minimum-stability": "dev"
+    "require-dev": {
+        "phpunit/phpunit": "~4.3"
+    },
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "GdproUser\\": "src/",
+            "GdproUserTest\\": "test/"
+        },
+        "classmap": [
+            "Module.php"
+        ]
+    }
 }

@@ -4,19 +4,35 @@ $form = $this->loginForm;
 
 <div class="row">
     <div class="col-md-offset-4 col-md-4">
+        <form class="form-horizontal" enctype="multipart/form-data" method="post" role="form">
 
-        <div class="row">
+            <!-- Text input-->
             <?php
-                if(isset($this->errors)) {
-                    echo $this->partial('layout/partial/errors');
-                }
+            if (isset($errors)) {
+                echo $this->partial(
+                    'gdpro-base/form-element/errors',
+                    ['errors' => $errors]
+                );
+            }
+
+            echo $this->partial(
+                'gdpro-base/form-element/text',
+                ['element' => $form->get('email')]
+            );
+            echo $this->partial(
+                'gdpro-base/form-element/text',
+                ['element' => $form->get('password')]
+            );
+            echo $this->partial(
+                'gdpro-base/form-element/checkbox',
+                ['element' => $form->get('stayConnected')]
+            );
+
+            echo $this->partial(
+                'gdpro-base/form-element/submit',
+                ['text' => 'Se connecter']
+            );
             ?>
-
-            <div class="col-md-12">
-            <?php
-                echo $this->form($form);
-                ?>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
