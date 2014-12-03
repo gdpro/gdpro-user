@@ -33,46 +33,9 @@ return [
 //        ]
     ],
 
-    'controllers' => [
-        'invokables' => [
-            'GdproUser\Controller\Registration' => 'GdproUser\Controller\RegistrationController',
-        ],
-        'factories' => [
-            'GdproUser\Controller\Activation' => 'GdproUser\Factory\Controller\ActivationControllerFactory',
-            'GdproUser\Controller\Login' => 'GdproUser\Factory\Controller\LoginControllerFactory',
-            'GdproUser\Controller\Logout' => 'GdproUser\Factory\Controller\LogoutControllerFactory',
-        ]
-    ],
-
     'hydrators' => [
         'factories' => [
             'gdpro_user.hydrator.user' => 'GdproUser\Factory\Hydrator\UserHydratorFactory'
-        ]
-    ],
-
-    'view_manager' => [
-        'template_map' => [
-            // Mail
-            'gdpro_user/mail/user/activation' => __DIR__ . '/../view/mail/user/registration.phtml',
-        ],
-        'template_path_stack' => [
-            __DIR__ . '/../view',
-        ],
-    ],
-
-    'console' => [
-        'router' => [
-            'routes' => [
-                'user-reset-password' => [
-                    'options' => [
-                        'route'    => 'user-account reset-password [--verbose|-v] <userEmail>',
-                        'defaults' => [
-                            'controller' => 'GdproUser\Command\Index',
-                            'action'     => 'resetpassword'
-                        ]
-                    ]
-                ]
-            ]
         ]
     ],
 
@@ -80,8 +43,11 @@ return [
         'gdpro_user.login_redirection',
     ],
 
-    'service_manager' => include 'service_manager.config.php',
-    'router' => include 'router.config.php',
+    'controllers' => include 'controllers.config.php',
+    'console' => include 'console.config.php',
     'doctrine' => include 'doctrine.config.php',
+    'router' => include 'router.config.php',
+    'service_manager' => include 'service_manager.config.php',
+    'view_manager' => include 'view_manager.config.php',
 ];
 
