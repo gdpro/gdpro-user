@@ -29,26 +29,19 @@ class LoginController extends AbstractActionController
         $errors = [];
         if(isset($role)) {
             $errors[] = 'Vous devez &ecirc;tre connect&eacute; avec un compte '.$role;
+            $this->viewModel->setVariable('errors', $errors);
         }
-
-        /** @var \Zend\Http\Request $request */
-        $request = $this->getRequest();
 
         $this->viewModel->setVariable('loginForm', $this->loginForm);
 
-        // If request is not a post, return view
-        if(!$request->isPost()) {
-            $this->viewModel->setVariable('errors', $errors);
+        if(!$this->getRequest()->isPost()) {
             return $this->viewModel;
         }
 
-        // Get Post data and set into form
-        $postData = $this->params()->fromPost();
-        $this->loginForm->setData($postData);
+        $data = $this->params()->fromPost();
+        $this->loginForm->setData($data);
 
-        // If login form is not valid, return view
         if(!$this->loginForm->isValid()) {
-            $this->viewModel->setVariable('errors', $errors);
             return $this->viewModel;
         }
 
@@ -63,7 +56,5 @@ class LoginController extends AbstractActionController
             $this->viewModel->setVariable('errors', $errors);
             return $this->viewModel;
         }
-
-        return $this->redirect()->toRoute('auth/redirection');
     }
 }
