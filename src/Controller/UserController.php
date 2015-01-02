@@ -34,11 +34,21 @@ class UserController extends AbstractActionController
         $this->userExtractor = $userExtractor;
     }
 
-    public function listAction()
+    public function indexAction()
     {
         $user = $this->authenticationService->getIdentity();
 
         return $this->viewModel;
+    }
+
+    /**
+     * @return mixed
+     * @deprecated
+     */
+    public function listAction()
+    {
+        return $this->indexAction();
+
     }
 
     public function modifyAction()
