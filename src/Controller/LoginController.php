@@ -56,5 +56,7 @@ class LoginController extends AbstractActionController
             $this->viewModel->setVariable('errors', $errors);
             return $this->viewModel;
         }
+
+        return $this->redirect()->toRoute('auth/redirection');
     }
 }
