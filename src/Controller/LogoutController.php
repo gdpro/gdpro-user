@@ -3,6 +3,7 @@ namespace GdproUser\Controller;
 
 use Zend\Authentication\AuthenticationService;
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
 
 /**
  * Class LogoutController
