@@ -23,7 +23,7 @@ class ActivationService
         // If user don't exist return error
         if(!$user) {
             throw new \Exception(
-                'La clee d\'activation fourni n\'est pas valide ', 400
+                'La cl&eacute;e d\'activation fourni n\'est pas valide ', 400
             );
         }
 
