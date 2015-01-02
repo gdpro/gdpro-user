@@ -10,6 +10,8 @@ use Zend\Mvc\Controller\AbstractActionController;
  */
 class LogoutController extends AbstractActionController
 {
+    protected $viewModel;
+
     /**
      * @var \Zend\Authentication\AuthenticationService
      */
@@ -20,8 +22,10 @@ class LogoutController extends AbstractActionController
      * @param AuthenticationService $authenticationService
      */
     public function __construct(
+        ViewModel $viewModel,
         AuthenticationService $authenticationService
     ) {
+        $this->viewModel = $viewModel;
         $this->authenticationService = $authenticationService;
     }
 
