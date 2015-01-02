@@ -7,11 +7,14 @@ use Zend\View\Model\ViewModel;
 
 class ActivationController extends AbstractActionController
 {
+    protected $viewModel;
     protected $activationService;
 
     public function __construct(
+        ViewModel $viewModel,
         ActivationService $activationService
     ) {
+        $this->viewModel = $viewModel;
         $this->activationService = $activationService;
     }
 
@@ -21,6 +24,6 @@ class ActivationController extends AbstractActionController
 
         $this->activationService->activate($activationKey);
 
-        return new ViewModel();
+        return $this->viewModel;
     }
 }

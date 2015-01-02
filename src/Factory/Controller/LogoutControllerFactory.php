@@ -11,6 +11,7 @@ class LogoutControllerFactory implements FactoryInterface
         $services = $controllerManager->getServiceLocator();
 
         return new \GdproUser\Controller\LogoutController(
+            $services->get('view_model'),
             $services->get('gdpro_user.service.authentication')
         );
     }

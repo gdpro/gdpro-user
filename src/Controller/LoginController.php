@@ -13,10 +13,11 @@ class LoginController extends AbstractActionController
     protected $loginForm;
 
     public function __construct(
+        ViewModel $viewModel,
         LoginService $loginService,
         LoginForm $loginForm
     ) {
-        $this->viewModel = new ViewModel();
+        $this->viewModel = $viewModel;
         $this->loginService = $loginService;
         $this->loginForm = $loginForm;
     }

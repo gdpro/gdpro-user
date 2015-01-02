@@ -11,6 +11,7 @@ class LoginControllerFactory implements FactoryInterface
         $services = $controllerManager->getServiceLocator();
 
         return new \GdproUser\Controller\LoginController(
+            $services->get('view_model'),
             $services->get('gdpro_user.service.login'),
             $services->get('gdpro_user.form.login')
         );

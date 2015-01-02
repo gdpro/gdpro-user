@@ -11,6 +11,7 @@ class ActivationControllerFactory implements FactoryInterface
         $services = $controllerManager->getServiceLocator();
 
         return new \GdproUser\Controller\ActivationController(
+            $services->get('view_model'),
             $services->get('gdpro_user.service.activation')
         );
     }
