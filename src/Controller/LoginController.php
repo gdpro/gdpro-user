@@ -46,8 +46,8 @@ class LoginController extends AbstractActionController
         }
 
         // Hydrate User with data
-        $email = $postData['email'];
-        $password = $postData['password'];
+        $email = $data['email'];
+        $password = $data['password'];
         $authResult = $this->loginService->login($email, $password);
 
         if(!$authResult->isValid()) {
