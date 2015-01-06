@@ -46,15 +46,17 @@ class LoginController extends AbstractActionController
         }
 
         // Hydrate User with data
-        $email = $postData['email'];
-        $password = $postData['password'];
+        $email = $data['email'];
+        $password = $data['password'];
         $authResult = $this->loginService->login($email, $password);
 
-        if(!$authResult->isValid()) {
-            $errors = $authResult->getMessages();
-
-            $this->viewModel->setVariable('errors', $errors);
-            return $this->viewModel;
+        if($authResult->isValid()) {
+            return $this->redirect()->toRoute('auth/redirection');
         }
+
+        $errors[] = $authResult->getMessages();
+
+        $this->viewModel->setVariable('errors', $errors);
+        return $this->viewModel;
     }
 }
