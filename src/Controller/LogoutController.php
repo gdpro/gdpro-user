@@ -3,6 +3,7 @@ namespace GdproUser\Controller;
 
 use Zend\Authentication\AuthenticationService;
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
 
 /**
  * Class LogoutController
@@ -10,6 +11,8 @@ use Zend\Mvc\Controller\AbstractActionController;
  */
 class LogoutController extends AbstractActionController
 {
+    protected $viewModel;
+
     /**
      * @var \Zend\Authentication\AuthenticationService
      */
@@ -20,6 +23,7 @@ class LogoutController extends AbstractActionController
      * @param AuthenticationService $authenticationService
      */
     public function __construct(
+        ViewModel $viewModel,
         AuthenticationService $authenticationService
     ) {
         $this->authenticationService = $authenticationService;
