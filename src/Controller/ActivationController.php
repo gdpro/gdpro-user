@@ -21,8 +21,14 @@ class ActivationController extends AbstractActionController
     public function activateAction()
     {
         $activationKey = $this->params()->fromRoute('activation_key');
+        $errors = [];
 
-        $this->activationService->activate($activationKey);
+        try {
+            $this->activationService->activate($activationKey);
+        } catch(\Exception $e) {
+            $errors[] = $e->getMessage();
+            $this->viewModel->setVariable('errors', $errors);
+        }
 
         return $this->viewModel;
     }
