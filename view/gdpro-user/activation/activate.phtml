@@ -8,16 +8,26 @@ $homeUrl = $this->url('home');
         <h2>Confirmation d'activation</h2>
 
         <hr/>
-
-        <p class="lead">
-            Votre compte à bien été activé.
-        </p>
+        <?php
+        if($this->errors != null) {
+        ?>
+            <p class="lead">
+                Votre compte à bien été activé.
+            </p>
+        <?php
+        } else {
+        ?>
+            <p class="lead">
+               Votre compte n'a pas été activé.
+            </p>
+        <?php
+        }
+        ?>
         <p>
             <a href="<?php echo $homeUrl; ?>" title="Aller &agrave; la page d'accueil">
                 Retour &agrave; la page d'accueil
             </a>
         </p>
-
     </div>
 </div>
 
