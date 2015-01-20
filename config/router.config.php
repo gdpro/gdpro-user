@@ -61,7 +61,7 @@ return [
                             '__NAMESPACE__' => 'GdproUser\Controller',
                             'controller' => 'Login',
                             'action' => 'login',
-                            'role' => null
+//                            'role' => null
                         ],
                     ]
                 ],

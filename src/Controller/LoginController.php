@@ -54,7 +54,7 @@ class LoginController extends AbstractActionController
             return $this->redirect()->toRoute('auth/redirection');
         }
 
-        $errors[] = $authResult->getMessages();
+        $errors = array_merge($errors, $authResult->getMessages());
 
         $this->viewModel->setVariable('errors', $errors);
         return $this->viewModel;
