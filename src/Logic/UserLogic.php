@@ -50,12 +50,21 @@ class UserLogic
         return false;
     }
 
-    public function saveUser($user)
+    /**
+     * @param $user
+     */
+    public function save($user)
     {
         $user->setModificationDate(new \Datetime());
 
         $this->entityManager->persist($user);
         $this->entityManager->flush();
+    }
+
+    /** @deprecated */
+    public function saveUser($user)
+    {
+        return $this->save($user);
     }
 
     public function deleteUser($user)
