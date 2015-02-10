@@ -21,11 +21,11 @@ class ActivationController extends AbstractActionController
     public function activateAction()
     {
         $activationKey = $this->params()->fromRoute('activation_key');
-        $errors = [];
 
         try {
             $this->activationService->activate($activationKey);
         } catch(\Exception $e) {
+            $errors = [];
             $errors[] = $e->getMessage();
             $this->viewModel->setVariable('errors', $errors);
         }
