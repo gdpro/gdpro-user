@@ -1,7 +1,7 @@
 {
     "name": "gdpro/gdpro-user",
-    "description": "User Module",
-    "homepage": "https://github.com/gdpro/gdpro-skeleton-module/",
+    "description": "User Module for zend framework",
+    "homepage": "https://github.com/gdpro/gdpro-user/",
     "authors":[
         {
             "name":"Gary Gitton",
@@ -11,7 +11,6 @@
     ],
     "require": {
         "php": ">=5.5.8",
-        "zendframework/zendframework": "dev-master",
         "gdpro/gdpro-tool": "~1.0"
     },
     "require-dev": {
@@ -22,9 +21,6 @@
         "psr-4": {
             "GdproUser\\": "src/",
             "GdproUserTest\\": "test/"
-        },
-        "classmap": [
-            "Module.php"
-        ]
+        }
     }
 }
