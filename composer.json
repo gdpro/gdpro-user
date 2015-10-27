@@ -11,7 +11,7 @@
     ],
     "require": {
         "php": ">=5.5.8",
-        "gdpro/gdpro-tool": "~1.0"
+        "gdpro/gdpro-tool": "~1.0.2"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.3"
