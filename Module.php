@@ -4,6 +4,10 @@ namespace GdproUser;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
+/**
+ * Class Module
+ * @package GdproUser
+ */
 class Module
 {
     public function onBootstrap(MvcEvent $e)
